@@ -16,7 +16,6 @@ package ifx_dig_pkg;
 
   `include "ifx_dig_types.svh"
   `include "ifx_dig_config.svh"
-
   `include "ifx_dig_pin_toggle.svh"
   `include "ifx_dig_sequences.svh"
 

@@ -5,6 +5,7 @@ package ifx_dig_regblock_pkg;
 
   // TODO DAY2: Add include for register model classes here
   `include "ifx_dig_field.svh"
-  `include "ifx_dig_regblock.svh"
   `include "ifx_dig_registers.svh"
+  `include "ifx_dig_regblock.svh"
+  
 endpackage

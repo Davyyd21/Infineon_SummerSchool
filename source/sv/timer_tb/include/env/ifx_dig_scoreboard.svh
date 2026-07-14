@@ -59,7 +59,7 @@ endfunction : new
 function void ifx_dig_scoreboard::build_phase(uvm_phase phase);
   super.build_phase(phase);
   // TODO DAY2: Add infomessage for this phase
-
+  `uvm_info (get_type_name(), $sformatf(">>>>>>>>>>>>SCOREBOARD BUILD_PHASE starts<<<<<<<<<"), UVM_LOW)
   regblock = ifx_dig_regblock::type_id::create("regblock");
   regblock.build();
 
@@ -70,7 +70,7 @@ endfunction : build_phase
 function void ifx_dig_scoreboard::connect_phase(uvm_phase phase);
   super.connect_phase(phase);
   // TODO DAY2: Add infomessage for this phase
-
+  `uvm_info (get_type_name(), $sformatf(">>>>>>>>>>>>SCOREBOARD CONNECT_PHASE starts<<<<<<<<<"), UVM_LOW)
 endfunction : connect_phase
 
 function void ifx_dig_scoreboard:: end_of_elaboration_phase(uvm_phase phase);

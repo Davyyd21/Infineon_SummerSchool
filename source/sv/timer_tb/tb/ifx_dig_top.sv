@@ -20,7 +20,7 @@ module ifx_dig_top;
     run_test();
   end
 
-  wire               clk_i_w;
+  logic               clk_i_w;
   wire               rstn_i_w;
 
   wire acc_en_i_w;
@@ -32,7 +32,7 @@ module ifx_dig_top;
   wire [`EXT_INPUTS_NB-1:0] inputs_i_w;
   
   wire output_o_w;
-
+virtual ifx_dig_interface dig_if;   
   reg clk;
 
   // TODO DAY1: Create DUT instance and connect to the wires here.
@@ -109,9 +109,10 @@ TOP topdut(
   endtask
 
 
-  assign clk_i_w = clk;
+  
 
   initial begin
+    dig_if = DUT;
     uvm_config_db #(virtual ifx_dig_interface)::set(uvm_top, "*", "dig_if", dig_if);
 
     uvm_config_db #(virtual ifx_dig_data_bus_uvc_interface)::set(uvm_top, "data_bus_uvc_agt", "vif", data_uvc_if);

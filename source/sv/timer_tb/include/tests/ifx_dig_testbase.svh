@@ -61,7 +61,7 @@ class ifx_dig_testbase extends uvm_test;
   virtual function void build_phase(uvm_phase phase);
     super.build_phase(phase);
     // TODO DAY2: Add infomessage for this phase
-
+      `uvm_info (get_type_name(), $sformatf(">>>>>>>>>>>>TESTBASE BUILD_PHASE starts<<<<<<<<<"), UVM_LOW)
     //------------------=====================================---------------
     //-=========================- CREATE CONFIGURATION OBJECT -=========================-
     //------------------=====================================---------------
@@ -100,7 +100,7 @@ class ifx_dig_testbase extends uvm_test;
   virtual function void connect_phase(uvm_phase phase);
     super.connect_phase(phase);
     // TODO DAY2: Add infomessage for this phase
-
+      `uvm_info (get_type_name(), $sformatf(">>>>>>>>>>>>TESTBASE CONNECT_PHASE starts<<<<<<<<<"), UVM_LOW)
     // add necessary connections
   endfunction : connect_phase
 

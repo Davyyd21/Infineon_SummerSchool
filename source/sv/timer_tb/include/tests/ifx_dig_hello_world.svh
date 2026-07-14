@@ -4,7 +4,7 @@
  * or made publicly available without prior written consent of the owner.
  */
 
-class ifx_dig_hello_world extends uvm_test;
+class ifx_dig_hello_world extends ifx_dig_testbase;
 
   `uvm_component_utils(ifx_dig_hello_world)
 

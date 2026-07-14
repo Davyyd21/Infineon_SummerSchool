@@ -40,7 +40,7 @@ class ifx_dig_env extends uvm_env;
   function void connect_phase(uvm_phase phase);
     super.connect_phase(phase);
     // TODO DAY2: Add infomessage for this phase
-
+    `uvm_info (get_type_name(), $sformatf(">>>>>>>>>>>>ENV CONNECT_PHASE starts<<<<<<<<<"), UVM_LOW)
     scoreboard.p_env = this;
     scoreboard.p_env_cfg = p_dig_cfg;
 
