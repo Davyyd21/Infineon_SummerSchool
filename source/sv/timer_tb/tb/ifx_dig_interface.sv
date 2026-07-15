@@ -22,6 +22,9 @@ interface ifx_dig_interface (
   );
 
   // TODO DAY6: Add SVA assertions to check the reset values of the outputs
+  initial begin
+    inputs_i = 0;
+  end
   
   initial begin
     inputs_i = 0;
