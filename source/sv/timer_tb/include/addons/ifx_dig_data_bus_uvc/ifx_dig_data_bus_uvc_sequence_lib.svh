@@ -133,25 +133,22 @@ class ifx_dig_data_bus_uvc_write_read_sequence extends uvm_sequence #(ifx_dig_da
 
 
   virtual task body();
-    
-    write_seq = ifx_dig_data_bus_uvc_write_sequence::type_id::create("write_seq");
-    read_seq = ifx_dig_data_bus_uvc_read_sequence::type_id::create("read_seq");
 
-    if(is_random_b)
-    begin
-      write_seq.is_random_b = 1;
-      read_seq.is_random_b = 1;
-    end
-    else
-    begin
-      write_seq.is_random_b = 0;
-      read_seq.is_random_b = 0;
-      write_seq.address = address;
-      write_seq.data = data;
-      read_seq.address = address;
-    end
-    `uvm_do(this.write_seq)
-    `uvm_do(this.read_seq)
-  endtask : body
+  write_seq = ifx_dig_data_bus_uvc_write_sequence::type_id::create("write_seq");
+
+  read_seq = ifx_dig_data_bus_uvc_read_sequence::type_id::create("read_seq");
+
+  write_seq.is_random_b = 0;
+  read_seq.is_random_b  = 0;
+
+  write_seq.address = address;
+  write_seq.data    = data;
+
+  read_seq.address = address;
+
+  write_seq.start(m_sequencer);
+  read_seq.start(m_sequencer);
+
+endtask : body
 
 endclass
