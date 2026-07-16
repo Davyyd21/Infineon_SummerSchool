@@ -129,6 +129,7 @@ class ifx_dig_testbase extends uvm_test;
     data_bus_read_seq   = ifx_dig_data_bus_uvc_read_sequence::type_id::create("data_bus_read_seq", this);
     data_bus_write_seq  = ifx_dig_data_bus_uvc_write_sequence::type_id::create("data_bus_write_seq", this);
     data_bus_write_read_seq = ifx_dig_data_bus_uvc_write_read_sequence::type_id::create("data_bus_write_read_seq",this);
+    pin_toggle_seq = ifx_pin_toggle_sequence::type_id::create("pin_toggle_seq", this);
     `uvm_info(get_full_name(), ">>>>> TESTBASE BUILD_PHASE done <<<<<", UVM_NONE)
   endfunction : build_phase
 
@@ -196,6 +197,20 @@ class ifx_dig_testbase extends uvm_test;
   // TODO DAY4: Implement a task for reading a register using the data bus read sequence
   task read_reg(string reg_name);
 
-  endtask : read_reg
+  ifx_dig_data_bus_uvc_read_sequence read_seq;
+  ifx_dig_reg reg_obj;
+
+  reg_obj = dig_env.scoreboard.regblock.get_reg_by_name(reg_name);
+
+  read_seq = ifx_dig_data_bus_uvc_read_sequence::type_id::create("read_seq",this);
+
+  read_seq.is_random_b = 0;
+  read_seq.address = reg_obj.get_address();
+
+  `uvm_info("READ_REG",$sformatf("Reading register %s from address %0d",reg_name,read_seq.address),UVM_NONE)
+
+  read_seq.start(dig_env.data_bus_uvc_agt.sequencer);
+
+endtask : read_reg
 
 endclass: ifx_dig_testbase

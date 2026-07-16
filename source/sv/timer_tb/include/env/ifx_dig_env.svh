@@ -14,6 +14,7 @@ class ifx_dig_env extends uvm_env;
 
   ifx_dig_data_bus_uvc_agent data_bus_uvc_agt;
 
+  ifx_dig_pin_sequencer pin_sequencer;
   // TODO DAY4: Declare an object called pin_sequencer for the pin_toggle sequencer and create the instance in the appropriate phase
 
   function new(string name, uvm_component parent);
@@ -28,11 +29,11 @@ class ifx_dig_env extends uvm_env;
     `uvm_info (get_type_name(), $sformatf(">>>>>>>>>>>>ENV BUILD_PHASE starts<<<<<<<<<"), UVM_LOW)
 
     scoreboard = ifx_dig_scoreboard::type_id::create("scoreboard", this);
-
     if (!uvm_config_db #(ifx_dig_config)::get(this, "*", "p_dig_cfg", p_dig_cfg))
     `uvm_fatal("DIG_ENV/NOCFG", "No config specified for Environment")
 
-    data_bus_uvc_agt              = ifx_dig_data_bus_uvc_agent::type_id::create("data_bus_uvc_agt", this);
+    data_bus_uvc_agt = ifx_dig_data_bus_uvc_agent::type_id::create("data_bus_uvc_agt", this);
+    pin_sequencer = ifx_dig_pin_sequencer::type_id::create("pin_sequencer",this);
 
   endfunction : build_phase
 
