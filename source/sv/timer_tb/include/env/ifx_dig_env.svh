@@ -46,7 +46,7 @@ class ifx_dig_env extends uvm_env;
     scoreboard.p_env_cfg = p_dig_cfg;
 
     // TODO DAY5: Connect the TLM ports of the data bus monitor to the corresponding TLM export in the scoreboard
-
+      data_bus_uvc_agt.monitor.mon_port.connect(scoreboard.data_bus_uvc_imp);
 
   endfunction : connect_phase
 

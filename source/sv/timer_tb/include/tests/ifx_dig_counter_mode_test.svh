@@ -59,10 +59,6 @@ class ifx_dig_counter_mode_test extends ifx_dig_testbase;
     // select input 1 + toggle output
     this.select_input = 1;
 
-    // select input
-    // select trigger option
-    // select out function
-    // select capture event
     write_reg_fields("CNT_MODE0", {"input_selection", "trigger_selection", "out_function", "capture_selection"}, {this.select_input, this.select_trigger, this.out_function, this.select_capture_event});
 
     read_reg("CNT_MODE0");

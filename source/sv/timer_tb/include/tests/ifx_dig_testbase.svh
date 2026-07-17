@@ -128,7 +128,7 @@ class ifx_dig_testbase extends uvm_test;
     data_bus_seq        = ifx_dig_data_bus_uvc_sequence::type_id::create("data_bus_seq", this);
     data_bus_read_seq   = ifx_dig_data_bus_uvc_read_sequence::type_id::create("data_bus_read_seq", this);
     data_bus_write_seq  = ifx_dig_data_bus_uvc_write_sequence::type_id::create("data_bus_write_seq", this);
-    data_bus_write_read_seq = ifx_dig_data_bus_uvc_write_read_sequence::type_id::create("data_bus_write_read_seq",this);
+   // data_bus_write_read_seq = ifx_dig_data_bus_uvc_write_read_sequence::type_id::create("data_bus_write_read_seq",this);
     pin_toggle_seq = ifx_pin_toggle_sequence::type_id::create("pin_toggle_seq", this);
     `uvm_info(get_full_name(), ">>>>> TESTBASE BUILD_PHASE done <<<<<", UVM_NONE)
   endfunction : build_phase

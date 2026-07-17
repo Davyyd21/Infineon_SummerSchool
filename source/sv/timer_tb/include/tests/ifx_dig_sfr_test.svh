@@ -35,25 +35,25 @@ class ifx_dig_sfr_test extends ifx_dig_testbase;
 
       `uvm_info("SFR_TEST",$sformatf("Testing pattern 0x%04h",patterns[pattern_idx]),UVM_LOW)
 
-      write_reg_fields("CTRL0",{"mode"},{patterns[pattern_idx][1:0]});
+      `uvm_info("DEBUG", "Before CTRL0", UVM_NONE)
+      write_reg_fields("CTRL0", {"mode"}, {patterns[pattern_idx][1:0]});
+      `uvm_info("DEBUG", "After CTRL0", UVM_NONE)
 
-      write_reg_fields("PWM_MODE",{"duty_cycle","frequency_selection"},{patterns[pattern_idx][9:0],patterns[pattern_idx][13:12]});
+      write_reg_fields("PWM_MODE", {"duty_cycle", "frequency_sel"}, {patterns[pattern_idx][9:0], patterns[pattern_idx][13:12]});
 
-      write_reg_fields("CNT_MODE0",{"input_selection","trigger_selection","out_function","capture_selection"},{patterns[pattern_idx][3:0],patterns[pattern_idx][5:4],patterns[pattern_idx][8],patterns[pattern_idx][13:12]});
-
-      write_reg_fields("CNT_MODE1",{"target_value"},{patterns[pattern_idx][9:0]});
-
+      write_reg_fields("CNT_TIMER_MODE0", {"input_sel", "trigger_sel", "out_function", "capture_sel"}, {patterns[pattern_idx][3:0], patterns[pattern_idx][5:4], patterns[pattern_idx][8], patterns[pattern_idx][13:12]});
+      write_reg_fields("CNT_TIMER_MODE1", {"target_value"}, {patterns[pattern_idx][9:0]});
       read_reg("CTRL0");
       read_reg("PWM_MODE");
-      read_reg("CNT_MODE0");
-      read_reg("CNT_MODE1");
+      read_reg("CNT_TIMER_MODE0");
+      read_reg("CNT_TIMER_MODE1");
 
-      drive_reset(3, CYCLES);
+     // drive_reset(3, CYCLES);
 
     end
 
     `uvm_info("SFR_TEST", "SFR test finished", UVM_LOW)
-
+    `WAIT_NS(1000)
     phase.drop_objection(this);
 
   endtask : main_phase

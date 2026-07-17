@@ -58,12 +58,15 @@ endfunction : new
 
 function void ifx_dig_scoreboard::build_phase(uvm_phase phase);
   super.build_phase(phase);
-  // TODO DAY2: Add infomessage for this phase
-  `uvm_info (get_type_name(), $sformatf(">>>>>>>>>>>>SCOREBOARD BUILD_PHASE starts<<<<<<<<<"), UVM_LOW)
+
+  `uvm_info(get_type_name(), ">>>>>>>>>>>>SCOREBOARD BUILD_PHASE starts<<<<<<<<<", UVM_LOW)
+
   regblock = ifx_dig_regblock::type_id::create("regblock");
   regblock.build();
 
   // TODO DAY5: Get a handler to the virtual interface using the uvm_config_db mechanism
+  if (!uvm_config_db#(virtual ifx_dig_interface)::get(this, "", "dig_if", dig_vif))
+    `uvm_fatal("SCOREBOARD/NOVIF", "No virtual interface specified for scoreboard")
 
 endfunction : build_phase
 
@@ -81,6 +84,10 @@ endfunction : end_of_elaboration_phase
 task ifx_dig_scoreboard::run_phase(uvm_phase phase);
 
   // TODO DAY5: Add code allowing the golden model, checkers and coverage to run in parallel
-
+  fork
+    golden_model();
+    do_checkers();
+    collect_coverage();
+  join
 endtask : run_phase
 

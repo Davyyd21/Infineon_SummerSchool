@@ -61,23 +61,27 @@ end
 
 always_ff @(posedge clk_i or negedge rstn_i)
 begin
-    if(!rstn_i)
-    begin
-        rdata_o <= 16'h0000;
-    end
-    else if(acc_en_i && !wr_en_i)
-    begin
-        case(addr_i)
-            3'b000: rdata_o <= CTRL0;
-            3'b001: rdata_o <= PWM_MODE;
-            3'b010: rdata_o <= CNT_MODE0;
-            3'b011: rdata_o <= CNT_MODE1;
-            3'b100: rdata_o <= COUNTER_VALUE;       
-            3'b101: rdata_o <= COMMAND;
-            3'b110: rdata_o <= CAPTURE_VALUE;
-            default: rdata_o <= 16'h0000;
-        endcase
-    end
+  if(!rstn_i)
+  begin
+    rdata_o <= 16'h0000;
+  end
+  else if(acc_en_i && !wr_en_i)
+  begin
+    case(addr_i)
+      3'b000: rdata_o <= CTRL0;
+      3'b001: rdata_o <= PWM_MODE;
+      3'b010: rdata_o <= CNT_MODE0;
+      3'b011: rdata_o <= CNT_MODE1;
+      3'b100: rdata_o <= COUNTER_VALUE;
+      3'b101: rdata_o <= COMMAND;
+      3'b110: rdata_o <= CAPTURE_VALUE;
+      default: rdata_o <= 16'h0000;
+    endcase
+  end
+  else
+  begin
+    rdata_o <= 16'h0000;
+  end
 end
 
 assign Mode = CTRL0[1:0];
