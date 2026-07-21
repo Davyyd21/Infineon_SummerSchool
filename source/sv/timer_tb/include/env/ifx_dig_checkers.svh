@@ -8,7 +8,7 @@ task do_checkers();
   bit pwm_measure_timeout_b = 0;
 
   fork
-
+/*
     forever begin
        @(posedge dig_vif.clk_i);
       #1step;
@@ -19,7 +19,7 @@ task do_checkers();
       end
      // @(dig_vif.acc_en_i, dig_vif.rdata_o);
     end
-
+*/
     forever begin
       if(configured_mode == PWM_MODE && configured_duty_cycle == 0) begin
         dchk_03_pwm_on_0_duty_cycle: assert (dig_vif.output_o == 0)

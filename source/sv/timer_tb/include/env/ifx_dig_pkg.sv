@@ -18,6 +18,8 @@ package ifx_dig_pkg;
   `include "ifx_dig_config.svh"
   `include "ifx_dig_pin_toggle.svh"
   `include "ifx_dig_sequences.svh"
+  `include "ifx_dig_pin_driver.svh"
+  
 
   // TODO DAY4: Modify the typedef below to match the correct kind of sequence item that needs to be driven
   typedef uvm_sequencer #(ifx_dig_pin_toggle) ifx_dig_pin_sequencer;

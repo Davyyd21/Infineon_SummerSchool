@@ -59,19 +59,17 @@ class ifx_dig_counter_mode_test extends ifx_dig_testbase;
     // select input 1 + toggle output
     this.select_input = 1;
 
-    write_reg_fields("CNT_MODE0", {"input_selection", "trigger_selection", "out_function", "capture_selection"}, {this.select_input, this.select_trigger, this.out_function, this.select_capture_event});
-
-    read_reg("CNT_MODE0");
-
+    write_reg_fields("CNT_TIMER_MODE0", {"input_sel", "trigger_sel", "out_function", "capture_sel"}, {this.select_input, this.select_trigger, this.out_function, this.select_capture_event});
+    read_reg("CNT_TIMER_MODE0");
     // MODE1
     target_value = 5;
 
     `uvm_info("COUNTER_MODE_TEST", "Configure COUNTER MODE", UVM_NONE)
 
     // set target value
-    write_reg_fields("CNT_MODE1", {"target_value"}, {target_value});
+    write_reg_fields("CNT_TIMER_MODE1", {"target_value"}, {target_value});
 
-    read_reg("CNT_MODE1");
+    read_reg("CNT_TIMER_MODE1");
 
     // set counter mode - use regs function
     `uvm_info("COUNTER_MODE_TEST", "Change to COUNTER MODE", UVM_NONE)

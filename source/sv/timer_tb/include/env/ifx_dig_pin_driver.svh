@@ -16,22 +16,26 @@ class ifx_dig_pin_driver extends uvm_driver #(ifx_dig_pin_toggle);
   endfunction
 
   task run_phase(uvm_phase phase);
-    ifx_dig_pin_toggle item;
+  ifx_dig_pin_toggle item;
 
-    forever begin
-      seq_item_port.get_next_item(item);
+  forever begin
+    seq_item_port.get_next_item(item);
 
-      repeat(item.num_of_toggles) begin
-        dig_vif.inputs_i[item.selected_pin - 1] = 0;
-        #(item.half_period_ns);
-        dig_vif.inputs_i[item.selected_pin - 1] = 1;
-        #(item.half_period_ns);
-      end
+    `uvm_info("PIN_DRIVER", $sformatf("Received item: pin=%0d toggles=%0d half_period=%0d", item.selected_pin, item.num_of_toggles, item.half_period_ns), UVM_NONE)
 
-      dig_vif.inputs_i[item.selected_pin - 1] = 0;
-
-      seq_item_port.item_done();
+    repeat(item.num_of_toggles) begin
+      dig_vif.inputs_i[item.selected_pin - 1] <= 0;
+      #(item.half_period_ns);
+      dig_vif.inputs_i[item.selected_pin - 1] <= 1;
+      #(item.half_period_ns);
     end
-  endtask
 
-endclass
+    dig_vif.inputs_i[item.selected_pin - 1] <= 0;
+
+    `uvm_info("PIN_DRIVER", "Toggle finished", UVM_NONE)
+
+    seq_item_port.item_done();
+  end
+endtask
+
+endclass : ifx_dig_pin_driver
