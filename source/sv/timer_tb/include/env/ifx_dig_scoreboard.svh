@@ -49,8 +49,10 @@ endclass : ifx_dig_scoreboard
 
 function ifx_dig_scoreboard::new(string name = "ifx_dig_scoreboard", uvm_component parent);
   super.new(name, parent);
-  this.dcov_00_pwm_configuration        = new();
-
+  this.dcov_00_pwm_configuration = new();
+  this.dcov_01_input_selection_modes = new();
+  this.dcov_02_trigger_selection = new();
+  this.dcov_03_output_function   = new();
   data_bus_uvc_imp        = new("data_bus_uvc_imp", this);
 
 endfunction : new
